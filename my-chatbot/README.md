@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# AI Chatbot Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A customizable AI-powered chatbot web application built with React and TypeScript. This project allows users to interact with multiple AI models (e.g., OpenAI GPT, Anthropic Claude, xAI Grok) using their own API keys, with features for managing conversations.
 
-## Available Scripts
+## Features
+- **Multi-Model Support**: Switch between GPT, Claude, and Grok models.
+- **Secure API Key Input**: Store API keys locally in the browser with validation.
+- **Conversation Management**: 
+  - Auto-save ongoing conversations.
+  - Save up to 20 temporary conversations (oldest deleted when limit reached).
+  - Save permanent conversations separately.
+  - Delete conversations with confirmation.
+  - Start a new conversation with a "New" button.
+- **Dark Theme GUI**: Black background with highlighted conversation history on the left.
+- **Real-Time Chat**: Interactive chat interface covering the full desktop.
 
-In the project directory, you can run:
+## Prerequisites
+- Node.js (v14+ recommended)
+- npm (comes with Node.js)
+- A valid API key from OpenAI, Anthropic, or xAI (for testing respective models)
 
-### `npm start`
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd my-chatbot
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+   - Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Usage
+1. Enter your API key in the input field and select a model (e.g., GPT).
+   - Ensure the key is entered without quotes (e.g., `sk-proj-...`).
+   - Click "Save Key" (an error will prompt if the format is invalid).
+2. Type a message and click "Send" to chat.
+3. Use "Save Temporary" or "Save Permanent" to store conversations.
+4. Click "New" to start fresh (saves the current chat as temporary).
+5. View and load past conversations on the left panel; delete with confirmation.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Building for Production
+1. Create a production build:
+   ```bash
+   npm run build
+   ```
+2. Deploy the `build` folder using a service like Netlify or GitHub Pages.
 
-### `npm test`
+## Deployment
+- **Netlify**:
+  - Install Netlify CLI: `npm install -g netlify-cli`.
+  - Deploy: `netlify deploy --prod` (select `build` folder).
+- **GitHub Pages**:
+  - Install: `npm install gh-pages`.
+  - Update `package.json` with:
+    ```json
+    "homepage": "https://<your-username>.github.io/my-chatbot",
+    "scripts": {
+      "predeploy": "npm run build",
+      "deploy": "gh-pages -d build"
+    }
+    ```
+  - Deploy: `npm run deploy`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Contributing
+Feel free to fork this repository, submit issues, or create pull requests for enhancements.
 
-### `npm run build`
+## License
+[MIT License](LICENSE) - Feel free to modify and distribute.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Acknowledgments
+- Built with React, TypeScript, and axios.
+- Inspired by the need for a customizable AI chat interface.
