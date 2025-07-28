@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 import '../App.css';
 
 interface Message {
@@ -84,19 +85,53 @@ const ChatInterface: React.FC<Props> = ({ messages, setMessages }) => {
         <option value="grok">Grok</option>
         <option value="claude">Claude</option>
       </select>
-      <div style={{ height: '300px', overflowY: 'scroll', margin: '10px 0' }}>
+      <div className="message-container" style={{ height: 'calc(100% - 60px)', overflowY: 'scroll', margin: '10px 0' }}>
         {messages.map((msg, i) => (
           <div key={i} className={`message ${msg.role}`}>
-            <strong>{msg.role}:</strong> {msg.content}
+            <strong>{msg.role}:</strong>
+            {msg.role === 'assistant' ? (
+              <ReactMarkdown
+                components={{
+                  p({ children }) {
+                    return <p className="markdown-content">{children}</p>;
+                  },
+                  h3({ children }) {
+                    return <h3 className="markdown-content">{children}</h3>;
+                  },
+                  ul({ children }) {
+                    return <ul className="markdown-content">{children}</ul>;
+                  },
+                  li({ children }) {
+                    return <li className="markdown-content">{children}</li>;
+                  },
+                  a({ children, href }) {
+                    return (
+                      <a className="markdown-content" href={href} target="_blank" rel="noopener noreferrer">
+                        {children}
+                      </a>
+                    );
+                  },
+                  code({ children }) {
+                    return <code className="markdown-content">{children}</code>;
+                  },
+                }}
+              >
+                {msg.content}
+              </ReactMarkdown>
+            ) : (
+              msg.content
+            )}
           </div>
         ))}
       </div>
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        style={{ width: '80%' }}
-      />
-      <button onClick={sendMessage}>Send</button>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          style={{ flex: 1, marginRight: '10px' }}
+        />
+        <button onClick={sendMessage}>Send</button>
+      </div>
     </div>
   );
 };
