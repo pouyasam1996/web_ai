@@ -16,11 +16,12 @@ function App() {
 
   const handleNew = () => {
     if (currentConvoRef.current.length > 0) {
-      // Save current conversation as temporary before starting new
       window.dispatchEvent(new Event('saveCurrentConvo'));
     }
     setMessages([]);
     currentConvoRef.current = [];
+    // Add this line to clear files too:
+    window.dispatchEvent(new Event('clearFiles'));
   };
 
   return (
